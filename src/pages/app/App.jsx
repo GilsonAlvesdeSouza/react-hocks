@@ -1,9 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
-import narutoImg from '../../images/naruto.png'
+import narutoImg from '../../assets/images/naruto.png'
 import {Content, NarutoImg} from "./styles";
 import {Quotes} from "../../components";
 import {getQuote} from '../../services'
-import jutsoSound from '../../sounds/jutso.mp3'
+import jutsoSound from '../../assets/sounds/jutso.mp3'
 
 const audio = new Audio(jutsoSound);
 
@@ -20,13 +20,21 @@ export function App() {
         const quote = await getQuote();
 
         if (isMounted.current) {
-            audio.play();
+            setQuoteState(quote);
+            await audio.play();
+        }
+    };
+
+    const firstOnUpdate = async () => {
+        const quote = await getQuote();
+
+        if (isMounted.current) {
             setQuoteState(quote);
         }
     };
 
     useEffect(() => {
-        onUpdate();
+        firstOnUpdate();
         return () => isMounted.current = false;
     }, []);
 

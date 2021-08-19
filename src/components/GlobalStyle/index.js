@@ -1,5 +1,5 @@
 import {createGlobalStyle} from 'styled-components';
-import bgImg from '../../images/bg.jpeg';
+import bgImg from '../../assets/images/bg.jpeg';
 
 const GlobalStyle = createGlobalStyle`
   body {
